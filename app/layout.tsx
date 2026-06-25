@@ -21,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="zh-CN">
+    <html lang="en">
       <head>
         {/* Google Search Console verification */}
         <meta name="google-site-verification" content="4cd6cdf221ea7b0b" />
@@ -38,6 +38,8 @@ export default function RootLayout({
             `,
           }}
         />
+        {/* Google AdSense */}
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8925824244664340" crossOrigin="anonymous" />
       </head>
       <body className="font-body min-h-screen flex flex-col">
         {children}

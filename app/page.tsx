@@ -146,6 +146,16 @@ export default function HomePage() {
         <main className="flex-1 bg-tactical-grid p-4 lg:p-6">
           <div className="max-w-6xl mx-auto space-y-6">
 
+            {/* ===== Hero Banner ===== */}
+            <section className="relative overflow-hidden border border-border-subtle bg-abyss-light">
+              <img
+                src="/hero.jpg"
+                alt="Tabletop Tavern"
+                className="w-full h-48 lg:h-64 object-cover opacity-80"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-abyss-light via-transparent to-transparent pointer-events-none" />
+            </section>
+
             {/* ===== Section: Featured Tier List ===== */}
             <section>
               <div className="flex items-center justify-between mb-4">
