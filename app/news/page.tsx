@@ -24,6 +24,35 @@ const NEWS: NewsItem[] = [
   {
     date: '2026-06-25',
     tag: 'META',
+    title: 'Meta Shift: Elves Surge After v1.6.23 Row Mechanics — New S-Tier Contender?',
+    excerpt:
+      'The Patch v1.6.23 row-based positioning system has produced its first major meta shakeup, and the biggest winner is Elves. With units now properly arranging in rows by battlefield position, ranged-heavy compositions — Elves\' specialty — can now maintain clean firing lines without melee units randomly shuffling into their path.',
+    body: [
+      'The row mechanic change sounds subtle on paper, but in practice it fundamentally alters how ranged damage dealers position in battle. Pre-patch, Elven Archers frequently found themselves blocked by friendly Orc or Human frontline units that would shuffle laterally during engagement — sometimes cutting off their own archers\' line of sight entirely. Post-patch, front-row units stay in the front row, back-row units stay in the back, and Elven Archers can fire unimpeded.',
+      'Early data from community Discord tournaments shows Elves\' win rate climbing from 52% to approximately 57-58% in the week since the patch — putting them within striking distance of Vikings (58%) for the S-tier crown. The Orcs matchup remains Elves\' hardest counter (heavy bruisers can close the gap before archers stack enough DPS), but Elves now reliably beat Humans and Dwarves, and the formerly losing Vikings matchup has flipped to roughly even.',
+      'The optimal Elven composition post-patch: 3 Elven Archers + 2 Elven Spearmen (for flank guard) + 1 support unit (Dwarven Shieldbearer or Human Cleric). The Spearmen\'s anti-cavalry bonus now matters more because enemy cavalry units can no longer slip through formation gaps created by the old shuffling behavior. Full build guide with item synergies and campaign-specific loadouts has been added to the Best Builds page.',
+    ],
+    author: 'TTG Meta Team',
+    readTime: '4 min',
+  } as NewsItem,
+  {
+    date: '2026-06-25',
+    tag: 'PATCH',
+    title: 'Patch v1.6.23: Battle Mechanics Update — Row Positioning, Speed Hotkeys, and Deathhaven Fiends Buff',
+    excerpt:
+      'Vinewood Studio dropped Patch v1.6.23 on June 24 with a battle mechanics overhaul: units now properly arrange in rows based on battlefield position, eliminating the frustrating cross-back-and-forth behavior. Game speed can now be adjusted via remappable hotkeys, and double-clicking a unit or its card selects all units of the same type — a major quality-of-life improvement for commanding large armies. A new tutorial panel conveys these mechanics to new players.',
+    body: [
+      'This patch focuses on refining the core combat experience. The row arrangement fix addresses a long-standing complaint where units would path inefficiently across each other during formation changes, disrupting tactical positioning.',
+      'Speed hotkeys are fully remappable in settings, giving players fine control over game pace — particularly useful for speedrunning strategies or careful tactical analysis during critical turns.',
+      'Balance change: Deathhaven Fiends received a significant stat rework, now gaining Backstabber and Outrider traits with 32 attack / 32 defense / 28 weapon strength / 45 speed. This shifts the unit toward an aggressive flanking role.',
+      'Bug fixes include: battlefield speed not pausing correctly when opening settings while paused, bag model connections on SerendaelOfNytheria, and several minor visual polish items.',
+    ],
+    author: 'Vinewood Studio',
+    readTime: '4 min',
+  },
+  {
+    date: '2026-06-25',
+    tag: 'META',
     title: 'Patch 1.0.2 胜率报告：维京人跌落 S 段,兽人接管版本',
     excerpt:
       '根据过去 72 小时 4.8 万场排位数据,Viking 胜率从 58% 跌至 54%,Orc 凭"重装冲锋"流派回升至 57% 重新登顶。',
