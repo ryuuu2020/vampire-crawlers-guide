@@ -314,6 +314,7 @@ export default function HomePage() {
               <div className="flex flex-wrap gap-3">
                 <a href="https://dispatch-guide-sigma.vercel.app" target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-text-secondary hover:text-tactical-blue transition-colors">Dispatch Guide</a>
                 <a href="https://menace-guide.vercel.app" target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-text-secondary hover:text-tactical-blue transition-colors">MENACE Guide</a>
+                <a href="https://demon-lord-guide.vercel.app" target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-text-secondary hover:text-tactical-blue transition-colors">Demon Lord Guide</a>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
