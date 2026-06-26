@@ -1,563 +1,213 @@
-'use client';
-
 /* ============================================
-   Template A: Tactical Command Center
-   Builds Page — Tabletop Tavern Best Builds
-   Page content only — chrome in layout.tsx
+   Vampire Crawlers Guide — Builds & Combos
+   Deck archetypes, combo routes, and strategies
    ============================================ */
 
-/* ============================================
-   FAQ Snippets — structured data friendly
-   ============================================ */
-const FAQ_ITEMS = [
+const BUILD_ARCHETYPES = [
   {
-    question: 'What is the best build in Tabletop Tavern for Patch 1.0.2?',
-    answer:
-      'The Vikings Rush build currently holds the highest community-estimated campaign win rate at approximately 58%. Its early-game Berserker pressure combined with Longship mobility allows players to snowball before opponents can stabilize. That said, the "best" build depends heavily on the campaign map layout and enemy faction composition. Orcs Siege excels against defensive lineups, while Elves Precision dominates open-field engagements. We recommend mastering at least two builds to adapt to different scenarios.',
+    name: 'Ascending Chain',
+    difficulty: 'Beginner',
+    crawler: 'Suor Clerici',
+    description: 'Play cards in strict ascending mana cost (0 to 1 to 2 to 3+). Each card multiplies the next. Aim for 8+ card chains.',
+    keyCards: ['Bone (0)', 'King Bible (1)', 'Lightning Ring (2)', 'Hellfire (3)'],
+    arcana: 'Chain Link',
+    strength: 'Consistent multiplier scaling. Easy to execute.',
   },
   {
-    question: 'How do I transition from early game to late game with these builds?',
-    answer:
-      'Each build has a distinct power curve. Vikings Rush peaks in the early-to-mid game (turns 1-12) and should aim to close out the campaign before turn 15. Orcs Siege is weakest early but becomes nearly unstoppable once you assemble the full Catapult + Ironhide frontline by turn 10. Elves Precision maintains a steady power curve throughout — focus on preserving your Elven Archers and stacking critical strike items. The key transition point for all builds is the Shop node at turn 7, where you must decide between upgrading units or purchasing build-defining relics.',
+    name: 'Wild Bridge',
+    difficulty: 'Intermediate',
+    crawler: 'Arca',
+    description: 'Use Wild cards to bridge mana gaps in your chain. Play 0-cost, then Wild to skip 1-cost, then hit 2-cost and beyond.',
+    keyCards: ['Whip (0)', 'Wild Card', 'Lightning Ring (2)', 'Thunder Loop (4+)'],
+    arcana: 'Sharp Mind',
+    strength: 'Reaches higher multipliers by skipping weak cost tiers.',
   },
   {
-    question: 'Are these builds viable for the new campaign maps added in Patch 1.0.2?',
-    answer:
-      'Yes. The two new campaign maps introduced in Patch 1.0.2 — Frozen Pass and Burning Steppe — have been tested with all three builds by the community. Vikings Rush performs exceptionally well on Frozen Pass due to the narrow corridors favoring melee rushes. Orcs Siege struggles slightly on Burning Steppe (terrain slows siege unit movement) but compensates with higher durability. Elves Precision is the most map-agnostic of the three, maintaining consistent performance across all six campaign maps. Community testing data is aggregated from Discord reports and in-game replay analysis.',
+    name: 'Evolution Rush',
+    difficulty: 'Intermediate',
+    crawler: 'Antonio Belpaese',
+    description: 'Focus on evolving weapons as fast as possible. Prioritize base card + item card, then hit the Evolution Statue.',
+    keyCards: ['Whip + Hollow Heart', 'King Bible + Spellbinder'],
+    arcana: 'Over The Top',
+    strength: 'Evolution cards are inherently S-tier. Snowball advantage.',
+  },
+  {
+    name: 'Armor Tank',
+    difficulty: 'Advanced',
+    crawler: 'Dommario',
+    description: 'Stack armor cards to survive big hits, then use Shield Bash Arcana to convert armor into damage output.',
+    keyCards: ['Armor Cards', 'King Bible (1)', 'Unholy Vespers (2)'],
+    arcana: 'Shield Bash + Your Shield My Liege',
+    strength: 'Extremely defensive. Armor persists and deals damage.',
+  },
+  {
+    name: 'Draw Engine',
+    difficulty: 'Advanced',
+    crawler: 'Christine',
+    description: 'Maximize draw cards to cycle through your deck every turn. Draw cards are disproportionately strong in long chains.',
+    keyCards: ['Draw Cards', 'Bone (0)', 'Pentagram', 'Gorgeous Moon'],
+    arcana: 'Mana Syphon',
+    strength: 'Never run out of options. Consistent high-damage turns.',
   },
 ];
 
-/* ============================================
-   Build Data
-   ============================================ */
-interface Build {
-  name: string;
-  tagline: string;
-  faction: string;
-  difficulty: string;
-  powerSpike: string;
-  description: string;
-  coreUnits: { name: string; role: string; tier: number }[];
-  keyItems: { name: string; effect: string; priority: string }[];
-  strengths: string[];
-  weaknesses: string[];
-  playstyle: string;
-  winRate: string;
-  pickRate: string;
-}
-
-const BUILDS: Build[] = [
+const COMBO_PRINCIPLES = [
   {
-    name: 'Vikings Rush',
-    tagline: 'Overwhelm enemies before they can build a defense',
-    faction: 'Vikings',
-    difficulty: 'Medium',
-    powerSpike: 'Early-Mid (Turns 1-12)',
-    description:
-      'The Vikings Rush build leverages the faction\'s superior early-game aggression to dominate the opening phase of any campaign. Berserkers provide frontline pressure with their Frenzy passive (attack speed increases by 15% per kill, stacking up to 3 times), while Longship mobility allows rapid map traversal and flanking maneuvers. Shieldmaidens anchor the backline with group defense buffs, and Runecasters provide crucial anti-armor magic damage against heavily armored targets like Dwarven Ironbreakers. The build aims to secure a decisive advantage by turn 8-10 and close out the campaign before late-game scaling factions come online.',
-    coreUnits: [
-      { name: 'Berserker', role: 'Frontline DPS', tier: 3 },
-      { name: 'Longship', role: 'Mobility / Transport', tier: 2 },
-      { name: 'Shieldmaiden', role: 'Support / Defense Aura', tier: 2 },
-      { name: 'Runecaster', role: 'Anti-Armor Magic', tier: 3 },
-    ],
-    keyItems: [
-      {
-        name: 'Berserker\'s Mead Horn',
-        effect: 'All Berserkers gain +20% attack damage for 10 seconds on activation',
-        priority: 'Core',
-      },
-      {
-        name: 'Frost Rune Amulet',
-        effect: 'Runecaster spells apply a 30% slow for 3 seconds',
-        priority: 'High',
-      },
-      {
-        name: 'Stormforged Greaves',
-        effect: '+15% movement speed for all melee units',
-        priority: 'Medium',
-      },
-    ],
-    strengths: [
-      'Fastest early-game clear speed of all builds',
-      'Excellent map mobility via Longship repositioning',
-      'Strong against squishy ranged compositions (Elves, Humans)',
-      'Frenzy stacking creates snowball potential',
-    ],
-    weaknesses: [
-      'Falls off sharply after turn 15 if not ahead',
-      'Vulnerable to heavy crowd control (Dwarven Stun, Orc Knockback)',
-      'Low base durability — relies on Shieldmaiden aura',
-      'Poor performance on defensive holdout missions',
-    ],
-    playstyle:
-      'Aggressive tempo. Push enemy camps continuously, take Shop nodes only for essential upgrades, and avoid Rest nodes unless critically low on HP. The goal is to win before the enemy reaches their power spike.',
-    winRate: '~58%',
-    pickRate: '~32%',
+    rule: 'Ascending Order',
+    detail: 'Always play cards from lowest mana cost to highest. Each card in the chain multiplies the next card effect. A 0 to 1 to 2 to 3 chain gives exponentially more damage than playing them in any other order.',
   },
   {
-    name: 'Orcs Siege',
-    tagline: 'Crush enemy fortifications with overwhelming firepower',
-    faction: 'Orcs',
-    difficulty: 'Hard',
-    powerSpike: 'Mid-Late (Turns 10-20)',
-    description:
-      'Orcs Siege is a slow-burn build that sacrifices early tempo for an unstoppable late-game composition. The core strategy revolves around protecting Catapults — long-range siege units that deal massive area damage to structures and clumped enemies. Ironhide frontliners provide an immovable wall with their Thick Skin passive (reduces all incoming damage by 25%), while Shamans deploy healing totems and damage amplification curses. War Drummer units are the build\'s hidden gem: their Battle Rhythm aura grants +10% attack speed and +5% movement speed to all nearby Orc units, stacking with multiple Drummers.',
-    coreUnits: [
-      { name: 'Catapult', role: 'Siege / AoE Damage', tier: 4 },
-      { name: 'Ironhide', role: 'Frontline Tank', tier: 3 },
-      { name: 'Shaman', role: 'Healer / Debuffer', tier: 3 },
-      { name: 'War Drummer', role: 'Aura Support', tier: 2 },
-    ],
-    keyItems: [
-      {
-        name: 'Siege Commander\'s Banner',
-        effect: 'Catapults deal +35% damage to structures and gain +2 range',
-        priority: 'Core',
-      },
-      {
-        name: 'Ironhide Pauldrons',
-        effect: 'Ironhides reflect 10% of blocked damage back to attackers',
-        priority: 'High',
-      },
-      {
-        name: 'War Drum of the Ancients',
-        effect: 'War Drummer aura radius increased by 50%',
-        priority: 'Medium',
-      },
-      {
-        name: 'Shaman\'s Spirit Staff',
-        effect: 'Healing totems also grant +15% damage reduction',
-        priority: 'High',
-      },
-    ],
-    strengths: [
-      'Unmatched siege and structure damage output',
-      'Incredible late-game durability with Ironhide + Shaman synergy',
-      'Dominates defensive missions and boss encounters',
-      'War Drummer stacking provides exponential army-wide scaling',
-    ],
-    weaknesses: [
-      'Very slow early game — vulnerable to rush builds',
-      'Catapults are immobile and easy to flank without proper positioning',
-      'Expensive unit costs limit early Shop flexibility',
-      'Struggles on maps with lots of chokepoints (Catapults need open sightlines)',
-    ],
-    playstyle:
-      'Methodical siege. Prioritize economy and unit preservation in the early game. Stack Ironhides in a concave formation to protect Catapults. Take Rest nodes liberally to keep units alive — you win by outlasting, not outrushing.',
-    winRate: '~55%',
-    pickRate: '~28%',
+    rule: 'Chain Length > Card Power',
+    detail: 'An 8-card ascending chain in one turn deals more total damage than two 4-card chains across two turns. Always extend your chain when possible.',
   },
   {
-    name: 'Elves Precision',
-    tagline: 'Surgical strikes from maximum range with critical hit synergy',
-    faction: 'Elves',
-    difficulty: 'Easy',
-    powerSpike: 'Consistent (All Phases)',
-    description:
-      'Elves Precision is the most consistent build in Tabletop Tavern, offering strong performance from the opening turn through the final boss. Elven Archers form the backbone with their Deadly Aim passive (critical hits deal 200% damage instead of 150%) and long attack range. Windriders provide scouting and hit-and-run harassment, while Druids offer flexible support through healing, crowd control roots, or damage amplification. The build excels at kiting — using superior range and movement speed to wear down enemies without taking return damage. Sentinel units guard the backline against flankers with their Entrapment ability (roots the first enemy that enters melee range for 2 seconds).',
-    coreUnits: [
-      { name: 'Elven Archer', role: 'Ranged DPS / Crit Carry', tier: 3 },
-      { name: 'Windrider', role: 'Scout / Harassment', tier: 2 },
-      { name: 'Druid', role: 'Flex Support', tier: 3 },
-      { name: 'Sentinel', role: 'Backline Protection', tier: 2 },
-    ],
-    keyItems: [
-      {
-        name: 'Eagle Eye Scope',
-        effect: '+25% critical strike chance for all ranged units',
-        priority: 'Core',
-      },
-      {
-        name: 'Windrider Cloak',
-        effect: 'Windriders gain invisibility for 4 seconds after leaving combat',
-        priority: 'High',
-      },
-      {
-        name: 'Druid\'s Grove Seed',
-        effect: 'Druid abilities have 30% reduced cooldown',
-        priority: 'Medium',
-      },
-    ],
-    strengths: [
-      'Most consistent power curve — no weak phase',
-      'Superior kiting and range advantage against melee-heavy comps',
-      'Flexible itemization with multiple viable build paths',
-      'Easiest build to learn for new players',
-    ],
-    weaknesses: [
-      'Lowest raw DPS ceiling compared to Vikings Rush and Orcs Siege',
-      'Vulnerable to dive compositions that bypass Sentinels',
-      'Relies heavily on critical strike RNG for maximum damage',
-      'Individual units are fragile — losing an Archer set is punishing',
-    ],
-    playstyle:
-      'Precision kiting. Maintain maximum range at all times. Use Windriders to scout ahead and bait enemy abilities. Stack critical strike chance items aggressively. Druids should prioritize healing in early game and switch to damage amplification after turn 8.',
-    winRate: '~52%',
-    pickRate: '~18%',
+    rule: 'Wild Cards Bridge Gaps',
+    detail: 'If you lack a 1-cost card, play a Wild card between your 0-cost and 2-cost to keep the chain alive. The multiplier continues uninterrupted.',
+  },
+  {
+    rule: 'Draw Cards Are Overpowered',
+    detail: 'Drawing extra cards mid-chain lets you find the next cost tier. Prioritize draw cards in your deck to ensure chain consistency.',
+  },
+  {
+    rule: 'Armor Cards Fill Low Slots',
+    detail: 'Armor cards typically cost 0-1 mana. Use them as chain starters alongside weapon cards. With Shield Bash Arcana, they also deal damage.',
+  },
+  {
+    rule: 'Turboturn Lets You Plan',
+    detail: 'You can queue your entire hand without waiting for animations. Take your time to plan the optimal order before playing the first card.',
   },
 ];
-
-/* ============================================
-   Comparison Table Data
-   ============================================ */
-const COMPARISON_ROWS = [
-  { metric: 'Win Rate (est.)', vikings: '~58%', orcs: '~55%', elves: '~52%' },
-  { metric: 'Pick Rate (est.)', vikings: '~32%', orcs: '~28%', elves: '~18%' },
-  { metric: 'Difficulty', vikings: 'Medium', orcs: 'Hard', elves: 'Easy' },
-  { metric: 'Power Spike', vikings: 'Early-Mid', orcs: 'Mid-Late', elves: 'Consistent' },
-  { metric: 'Clear Speed', vikings: 'Fast', orcs: 'Slow', elves: 'Medium' },
-  { metric: 'Durability', vikings: 'Low', orcs: 'Very High', elves: 'Low-Medium' },
-  { metric: 'Siege Damage', vikings: 'Medium', orcs: 'Very High', elves: 'Medium' },
-  { metric: 'Mobility', vikings: 'High', orcs: 'Low', elves: 'Very High' },
-  { metric: 'Map Flexibility', vikings: 'Medium', orcs: 'Low-Medium', elves: 'High' },
-  { metric: 'Boss Performance', vikings: 'Medium', orcs: 'Very High', elves: 'High' },
-];
-
-function getDifficultyTag(difficulty: string) {
-  switch (difficulty) {
-    case 'Easy':
-      return 'tag-success';
-    case 'Medium':
-      return 'tag-info';
-    case 'Hard':
-      return 'tag-warn';
-    default:
-      return 'tag';
-  }
-}
 
 export default function BuildsPage() {
   return (
     <div className="p-4 lg:p-6">
-      <div className="max-w-6xl mx-auto space-y-6">
-
-        {/* ===== Page Header ===== */}
-        <section>
-          <h1 className="font-display text-2xl font-bold tracking-tight text-text-primary">
-            Best Builds
+      <div className="max-w-6xl mx-auto space-y-8">
+        <div>
+          <h1 className="font-display text-2xl font-bold tracking-tight text-text-primary mb-2">
+            Best Builds & Combo Guide
           </h1>
-          <p className="text-sm text-text-secondary mt-1 max-w-2xl">
-            Community-tested faction builds for Tabletop Tavern. Each build
-            includes core unit composition, key item priorities, and matchup analysis.
-            Win rates are community estimated based on Discord reports and replay data.
+          <p className="text-sm text-text-secondary">
+            Master the combo chain system with build archetypes, card order strategies, and Arcana synergies for every playstyle.
           </p>
-        </section>
+        </div>
 
-            {/* ===== FAQ Snippets (Top of page for SEO) ===== */}
-            <section>
-              <div className="bg-abyss-light border border-border-subtle p-4 lg:p-5">
-                <h2 className="font-display text-lg font-semibold tracking-tight text-text-primary mb-4">
-                  Frequently Asked Questions
-                </h2>
-                <div className="space-y-0">
-                  {FAQ_ITEMS.map((faq, i) => (
-                    <details
-                      key={i}
-                      className={`group ${
-                        i < FAQ_ITEMS.length - 1 ? 'border-b border-grid-line' : ''
-                      }`}
-                    >
-                      <summary className="py-3 cursor-pointer select-none flex items-center justify-between text-sm text-text-primary hover:text-tactical-blue transition-colors font-medium">
-                        <span>{faq.question}</span>
-                        <span className="text-xs font-mono text-text-muted group-open:hidden ml-2 shrink-0">
-                          [+]
-                        </span>
-                        <span className="text-xs font-mono text-tactical-blue hidden group-open:inline ml-2 shrink-0">
-                          [-]
-                        </span>
-                      </summary>
-                      <p className="pb-3 text-sm text-text-secondary leading-relaxed">
-                        {faq.answer}
-                      </p>
-                    </details>
-                  ))}
+        {/* Combo Principles */}
+        <section>
+          <h2 className="font-display text-lg font-semibold text-text-primary mb-4">
+            Combo Chain Principles
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+            {COMBO_PRINCIPLES.map((principle, i) => (
+              <div key={i} className="stat-card">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="font-mono text-xs text-tactical-blue">RULE {String(i + 1).padStart(2, '0')}</span>
                 </div>
-              </div>
-            </section>
-
-            {/* ===== Build Cards ===== */}
-            {BUILDS.map((build, idx) => (
-              <section key={idx}>
-                <div className="bg-abyss-light border border-border-subtle">
-                  {/* Build Header */}
-                  <div className="p-4 lg:p-5 border-b border-grid-line">
-                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-                      <div>
-                        <div className="flex items-center gap-3 flex-wrap">
-                          <h2 className="font-display text-xl font-semibold tracking-tight text-text-primary">
-                            {build.name}
-                          </h2>
-                          <span className={`tag ${getDifficultyTag(build.difficulty)}`}>
-                            {build.difficulty}
-                          </span>
-                          <span className="tag">{build.faction}</span>
-                          <span className="text-xs font-mono text-text-muted">
-                            {build.powerSpike}
-                          </span>
-                        </div>
-                        <p className="text-sm text-tactical-blue mt-1.5 font-mono">
-                          {build.tagline}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-4 shrink-0">
-                        <div className="text-right">
-                          <p className="text-[10px] font-mono uppercase text-text-muted">Win Rate</p>
-                          <p className="font-mono text-sm font-semibold text-terminal-green tabular-nums">
-                            {build.winRate}
-                          </p>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-[10px] font-mono uppercase text-text-muted">Pick Rate</p>
-                          <p className="font-mono text-sm font-semibold text-text-secondary tabular-nums">
-                            {build.pickRate}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Build Body */}
-                  <div className="p-4 lg:p-5 space-y-4">
-                    {/* Description */}
-                    <p className="text-sm text-text-secondary leading-relaxed">
-                      {build.description}
-                    </p>
-
-                    {/* Three-column grid: Units / Items / Strengths-Weaknesses */}
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                      {/* Core Units */}
-                      <div>
-                        <h3 className="text-[10px] font-mono uppercase tracking-wider text-text-muted mb-2">
-                          Core Units
-                        </h3>
-                        <div className="space-y-2">
-                          {build.coreUnits.map((unit, ui) => (
-                            <div
-                              key={ui}
-                              className="flex items-center justify-between py-1.5 px-2 border border-grid-line bg-abyss"
-                            >
-                              <div>
-                                <span className="text-sm text-text-primary">{unit.name}</span>
-                                <span className="text-xs text-text-muted ml-2">{unit.role}</span>
-                              </div>
-                              <span className="text-xs font-mono text-tactical-blue">
-                                T{unit.tier}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Key Items */}
-                      <div>
-                        <h3 className="text-[10px] font-mono uppercase tracking-wider text-text-muted mb-2">
-                          Key Items
-                        </h3>
-                        <div className="space-y-2">
-                          {build.keyItems.map((item, ii) => (
-                            <div
-                              key={ii}
-                              className="py-1.5 px-2 border border-grid-line bg-abyss"
-                            >
-                              <div className="flex items-center justify-between">
-                                <span className="text-sm text-text-primary">{item.name}</span>
-                                <span
-                                  className={`text-[10px] font-mono px-1.5 py-0.5 border ${
-                                    item.priority === 'Core'
-                                      ? 'text-warning-orange border-warning-orange/30 bg-warning-orange/10'
-                                      : item.priority === 'High'
-                                      ? 'text-tactical-blue border-tactical-blue/30 bg-tactical-blue/10'
-                                      : 'text-text-secondary border-border-subtle'
-                                  }`}
-                                >
-                                  {item.priority}
-                                </span>
-                              </div>
-                              <p className="text-xs text-text-muted mt-0.5">{item.effect}</p>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Strengths & Weaknesses */}
-                      <div className="space-y-3">
-                        <div>
-                          <h3 className="text-[10px] font-mono uppercase tracking-wider text-terminal-green mb-2">
-                            Strengths
-                          </h3>
-                          <ul className="space-y-1">
-                            {build.strengths.map((s, si) => (
-                              <li
-                                key={si}
-                                className="text-xs text-text-secondary flex items-start gap-1.5"
-                              >
-                                <span className="text-terminal-green mt-0.5 shrink-0">+</span>
-                                {s}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                        <div>
-                          <h3 className="text-[10px] font-mono uppercase tracking-wider text-terminal-red mb-2">
-                            Weaknesses
-                          </h3>
-                          <ul className="space-y-1">
-                            {build.weaknesses.map((w, wi) => (
-                              <li
-                                key={wi}
-                                className="text-xs text-text-secondary flex items-start gap-1.5"
-                              >
-                                <span className="text-terminal-red mt-0.5 shrink-0">-</span>
-                                {w}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Playstyle note */}
-                    <div className="border-t border-grid-line pt-3">
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-tactical-blue mr-2">
-                        Playstyle
-                      </span>
-                      <span className="text-sm text-text-secondary">{build.playstyle}</span>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            ))}
-
-            {/* ===== Section Divider ===== */}
-            <div className="section-divider" />
-
-            {/* ===== Comparison Table ===== */}
-            <section>
-              <div className="mb-4">
-                <h2 className="font-display text-lg font-semibold tracking-tight text-text-primary">
-                  Build Comparison
-                </h2>
-                <p className="text-xs font-mono text-text-muted mt-1">
-                  Side-by-side comparison across key performance metrics
+                <h3 className="font-display text-sm font-semibold text-text-primary mb-1">
+                  {principle.rule}
+                </h3>
+                <p className="text-xs text-text-secondary leading-relaxed">
+                  {principle.detail}
                 </p>
               </div>
-              <div className="bg-abyss-light border border-border-subtle overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="border-b border-grid-line">
-                      <th className="text-left py-2.5 px-4 text-[10px] font-mono uppercase tracking-wider text-text-muted">
-                        Metric
-                      </th>
-                      <th className="text-center py-2.5 px-4 text-[10px] font-mono uppercase tracking-wider text-tactical-blue">
-                        Vikings Rush
-                      </th>
-                      <th className="text-center py-2.5 px-4 text-[10px] font-mono uppercase tracking-wider text-warning-orange">
-                        Orcs Siege
-                      </th>
-                      <th className="text-center py-2.5 px-4 text-[10px] font-mono uppercase tracking-wider text-terminal-green">
-                        Elves Precision
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {COMPARISON_ROWS.map((row, i) => (
-                      <tr key={i} className="data-row">
-                        <td className="py-2.5 px-4 text-xs font-mono text-text-secondary">
-                          {row.metric}
-                        </td>
-                        <td className="py-2.5 px-4 text-center font-mono tabular-nums text-text-primary">
-                          {row.vikings}
-                        </td>
-                        <td className="py-2.5 px-4 text-center font-mono tabular-nums text-text-primary">
-                          {row.orcs}
-                        </td>
-                        <td className="py-2.5 px-4 text-center font-mono tabular-nums text-text-primary">
-                          {row.elves}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </section>
+            ))}
+          </div>
+        </section>
 
-            {/* ===== How to Choose Section ===== */}
-            <section>
-              <div className="bg-abyss-light border border-border-subtle p-4 lg:p-5">
-                <h2 className="font-display text-lg font-semibold tracking-tight text-text-primary mb-3">
-                  How to Choose Your Build
-                </h2>
-                <div className="text-sm text-text-secondary leading-relaxed space-y-3">
-                  <p>
-                    Selecting the right build depends on three factors: your preferred playstyle,
-                    the campaign map you are running, and the enemy faction you expect to face.
-                    Below is a decision framework to help you choose.
-                  </p>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3">
-                    <div className="border border-border-subtle p-3 bg-abyss">
-                      <h3 className="text-sm font-semibold text-tactical-blue mb-1">
-                        Pick Vikings Rush if...
-                      </h3>
-                      <ul className="text-xs text-text-secondary space-y-1">
-                        <li>- You enjoy aggressive, fast-paced gameplay</li>
-                        <li>- The map has narrow corridors (e.g., Frozen Pass)</li>
-                        <li>- You are facing Elves or Humans</li>
-                        <li>- You want to finish campaigns quickly</li>
-                      </ul>
-                    </div>
-                    <div className="border border-border-subtle p-3 bg-abyss">
-                      <h3 className="text-sm font-semibold text-warning-orange mb-1">
-                        Pick Orcs Siege if...
-                      </h3>
-                      <ul className="text-xs text-text-secondary space-y-1">
-                        <li>- You prefer methodical, defensive play</li>
-                        <li>- The map has open sightlines (avoid Burning Steppe)</li>
-                        <li>- You are facing Dwarves or other tanky comps</li>
-                        <li>- You enjoy late-game power fantasy</li>
-                      </ul>
-                    </div>
-                    <div className="border border-border-subtle p-3 bg-abyss">
-                      <h3 className="text-sm font-semibold text-terminal-green mb-1">
-                        Pick Elves Precision if...
-                      </h3>
-                      <ul className="text-xs text-text-secondary space-y-1">
-                        <li>- You are new to Tabletop Tavern</li>
-                        <li>- You want consistent performance on any map</li>
-                        <li>- You enjoy kiting and micro-management</li>
-                        <li>- You prefer flexibility over specialization</li>
-                      </ul>
+        {/* Build Archetypes */}
+        <section>
+          <h2 className="font-display text-lg font-semibold text-text-primary mb-4">
+            Build Archetypes
+          </h2>
+          <div className="space-y-3">
+            {BUILD_ARCHETYPES.map((build, i) => (
+              <div key={i} className="stat-card">
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <h3 className="font-display text-base font-semibold text-text-primary">
+                      {build.name}
+                    </h3>
+                    <p className="text-xs text-text-muted mt-0.5">
+                      Crawler: {build.crawler} · Difficulty: {build.difficulty}
+                    </p>
+                  </div>
+                  <span className={`text-[10px] font-mono uppercase px-2 py-0.5 border ${
+                    build.difficulty === 'Beginner' ? 'text-terminal-green border-terminal-green/30 bg-terminal-green/10' :
+                    build.difficulty === 'Intermediate' ? 'text-tactical-blue border-tactical-blue/30 bg-tactical-blue/10' :
+                    'text-warning-orange border-warning-orange/30 bg-warning-orange/10'
+                  }`}>
+                    {build.difficulty}
+                  </span>
+                </div>
+                <p className="text-sm text-text-secondary mb-3 leading-relaxed">
+                  {build.description}
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                  <div>
+                    <p className="text-[10px] font-mono uppercase text-text-muted mb-1">Key Cards</p>
+                    <div className="flex flex-wrap gap-1">
+                      {build.keyCards.map((card, j) => (
+                        <span key={j} className="tag">{card}</span>
+                      ))}
                     </div>
                   </div>
-                  <p className="mt-3">
-                    For competitive play, mastering at least two builds is recommended.
-                    Vikings Rush covers aggressive matchups while Orcs Siege handles defensive
-                    scenarios. Elves Precision serves as a safe blind-pick option when you are
-                    unsure what the enemy is bringing.
-                  </p>
+                  <div>
+                    <p className="text-[10px] font-mono uppercase text-text-muted mb-1">Arcana</p>
+                    <p className="text-text-secondary">{build.arcana}</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-mono uppercase text-text-muted mb-1">Strength</p>
+                    <p className="text-text-secondary">{build.strength}</p>
+                  </div>
                 </div>
               </div>
-            </section>
-
-            {/* ===== Data Source Note ===== */}
-            <div className="terminal-block">
-              <p className="text-text-muted mb-1">
-                <span className="text-warning-orange">$</span> data.source
-              </p>
-              <p>method: community_estimated</p>
-              <p>patch: 1.0.2</p>
-              <p>sample_size: Discord reports + replay analysis</p>
-              <p>confidence: moderate</p>
-              <p className="text-text-muted mt-1">
-                Note: Win rates and pick rates are community estimates based on aggregated
-                player reports and replay data. Actual values may vary. Official API data is
-                not available as of this writing.
-              </p>
-              <p className="cursor-blink">last_updated: 2026-06-25</p>
-            </div>
-
+            ))}
           </div>
+        </section>
 
+        {/* Example Combo Chain */}
+        <section>
+          <h2 className="font-display text-lg font-semibold text-text-primary mb-4">
+            Example: 8-Card Ascending Chain
+          </h2>
+          <div className="bg-abyss-light border border-border-subtle p-4">
+            <div className="flex flex-wrap items-center gap-2 mb-4">
+              {[
+                { name: 'Bone', cost: '0', mult: '1x' },
+                { name: 'Whip', cost: '0', mult: '2x' },
+                { name: 'Armor', cost: '1', mult: '3x' },
+                { name: 'King Bible', cost: '1', mult: '4x' },
+                { name: 'Wild', cost: '*', mult: '5x' },
+                { name: 'Lightning Ring', cost: '2', mult: '6x' },
+                { name: 'Hellfire', cost: '3', mult: '8x' },
+                { name: 'Thunder Loop', cost: '4', mult: '12x' },
+              ].map((card, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <div className="bg-abyss border border-border-subtle px-3 py-2 text-center min-w-[100px]">
+                    <p className="text-xs font-mono text-text-primary font-medium">{card.name}</p>
+                    <p className="text-[10px] font-mono text-text-muted">cost: {card.cost}</p>
+                    <p className="text-[10px] font-mono text-tactical-blue">{card.mult}</p>
+                  </div>
+                  {i < 7 && <span className="text-text-muted text-sm">&rarr;</span>}
+                </div>
+              ))}
+            </div>
+            <p className="text-xs text-text-secondary">
+              Total multiplier: <span className="text-tactical-blue font-mono font-bold">12x</span> on the final card.
+              With Chain Link Arcana, the multiplier carries into the next turn for sustained damage.
+            </p>
+          </div>
+        </section>
+
+        <div className="terminal-block">
+          <p className="text-text-muted mb-1">
+            <span className="text-warning-orange">$</span> builds.optimize
+          </p>
+          <p>Chain length &gt; individual card power</p>
+          <p>Always fill 0-cost and 1-cost slots first</p>
+          <p>Wild cards are chain insurance — use wisely</p>
+          <p className="cursor-blink">builds loaded</p>
+        </div>
       </div>
+    </div>
   );
 }

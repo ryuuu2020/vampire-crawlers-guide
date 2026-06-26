@@ -1,153 +1,206 @@
-"use client";
+/* ============================================
+   Vampire Crawlers Guide — Beginner's Guide
+   Core mechanics, progression, and first-run tips
+   ============================================ */
 
-import { useEffect } from "react";
-
-export default function BeginnersGuidePage() {
-  useEffect(() => {
-    document.title = "Tabletop Tavern Beginner's Guide — First Campaign Walkthrough";
-  }, []);
-
+export default function BeginnerGuidePage() {
   return (
     <div className="p-4 lg:p-6">
-      <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-display font-bold text-text-primary mb-3">
-            Tabletop Tavern Beginner&apos;s Guide — First Campaign Walkthrough
+      <div className="max-w-4xl mx-auto space-y-8">
+        <div>
+          <h1 className="font-display text-2xl font-bold tracking-tight text-text-primary mb-2">
+            Beginner's Guide
           </h1>
-          <p className="text-text-secondary text-lg mb-8 max-w-3xl">
-            从零开始掌握这款 Roguelike RTS 的核心节奏。本文基于社区玩家估算数据，覆盖前三场战斗、派系首
-            选、经济管理以及常见新手失误，帮你用最小试错成本建立优势。
-          </p>
-
-          <section className="mb-10">
-            <h2 className="text-xl font-display font-semibold text-tactical-blue mb-4">
-              为什么前三场战斗决定整局节奏
-            </h2>
-            <p className="text-text-secondary leading-relaxed mb-4">
-              Tabletop Tavern 的战役采用 Roguelike 分支结构，每次开局你从一支小规模部队起步，通过三场早期战
-              斗积累金币、装备与单位。社区估算显示，前三场战斗的胜率每提升 10%，整个第一章通关概率大约提高
-              18%（数据来源：社区 200 份开局样本统计）。因此，与其追求后期华丽的稀有build，不如先把基础循环跑
-              顺。
-            </p>
-            <p className="text-text-secondary leading-relaxed">
-              早期战斗的核心目标不是“全歼敌人”，而是“用最小代价获取最大资源”。这意味着你要优先保护高价值单
-              位、避免无意义交换，并在每场战斗后合理分配金币。很多新手会把钱全部花在补兵上，结果后期没有装备
-              支撑，被精英敌人一波带走。
-            </p>
-          </section>
-
-          <section className="mb-10">
-            <h2 className="text-xl font-display font-semibold text-tactical-blue mb-4">
-              如何选择第一个派系
-            </h2>
-            <p className="text-text-secondary leading-relaxed mb-4">
-              游戏首发五个派系：Vikings、Orcs、Elves、Humans、Dwarves。对新手而言，最稳妥的开局是 Humans（均
-              衡）或 Dwarves（高防容错）。根据社区估算，Humans 的平均首通率比最难上手的 Elves 高出约 12%，而
-              Dwarves 的阵亡单位数通常最低，但经济发育较慢。
-            </p>
-            <p className="text-text-secondary leading-relaxed">
-              如果你想体验进攻快感，可以选择 Vikings 或 Orcs，但这两派更依赖近战包夹和技能释放时机，适合熟悉
-              RTS 微操的玩家。Elves 的远程优势很强，但单位脆弱，对站位要求极高，建议放到第二局以后尝试。
-            </p>
-          </section>
-
-          <section className="mb-10">
-            <h2 className="text-xl font-display font-semibold text-tactical-blue mb-4">
-              经济管理基础：铁、金币与人口
-            </h2>
-            <p className="text-text-secondary leading-relaxed mb-4">
-              Tabletop Tavern 的经济循环围绕三种资源：金币、铁和人口上限。金币通过战斗奖励和事件获得，用于购
-              买单位、装备和事件选项；铁是升级装备、建造防御工事的硬通货；人口则决定你能同时投入战场的单位数
-              量。社区估算建议，前中期保持金币与铁的消耗比例约为 3:1，优先升级 1-2 个主力装备，而不是雨露均
-              沾。
-            </p>
-            <p className="text-text-secondary leading-relaxed">
-              特别注意：战斗结束后若部队血量普遍偏低，先花钱治疗往往比直接买新单位更划算。一次治疗点的花费
-              通常比补充同人口新兵低 30% 左右（社区估算），且能保留已升级的精英单位经验。
-            </p>
-          </section>
-
-          <section className="mb-10">
-            <h2 className="text-xl font-display font-semibold text-tactical-blue mb-4">
-              新手路径：6 步建立稳定开局
-            </h2>
-            <ol className="list-decimal list-inside space-y-4 text-text-secondary leading-relaxed">
-              <li>
-                <strong className="text-text-primary">选 Humans 或 Dwarves 开始</strong>：前者补兵灵活，后者容错高。
-              </li>
-              <li>
-                <strong className="text-text-primary">第一场战斗：保存主力</strong>：不要追击杀不死的残敌，优先保护前排单位。
-              </li>
-              <li>
-                <strong className="text-text-primary">战后优先治疗</strong>：如果核心单位血量低于 50%，立刻买治疗。
-              </li>
-              <li>
-                <strong className="text-text-primary">补一个远程或反骑兵单位</strong>：第二场战斗通常会遇到骑兵骚扰。
-              </li>
-              <li>
-                <strong className="text-text-primary">升级第一件装备</strong>：选择主将的武器或护甲，优先提升存活能力。
-              </li>
-              <li>
-                <strong className="text-text-primary">选择低风险事件</strong>：早期不要赌高回报随机事件，稳定收益更重要。
-              </li>
-              <li>
-                <strong className="text-text-primary">第三场前形成 3+1 阵容</strong>：3 个基础单位 + 1 张有控制或范围技能的手牌。
-              </li>
-              <li>
-                <strong className="text-text-primary">进入第一章 Boss 战前检查人口</strong>：确保人口满编，装备耐久度充足。
-              </li>
-            </ol>
-          </section>
-
-          <section className="mb-10">
-            <h2 className="text-xl font-display font-semibold text-tactical-blue mb-4">
-              常见新手错误
-            </h2>
-            <ul className="list-disc list-inside space-y-3 text-text-secondary leading-relaxed">
-              <li>把金币全部花在造兵，导致装备和回复严重不足。</li>
-              <li>让远程单位站在前排，被骑兵一波冲散。</li>
-              <li>忽视地形加成，在狭窄路口和开阔平原用同一套阵型。</li>
-              <li>过度追求精英单位，忽略普通单位的性价比。</li>
-              <li>在事件节点选择赌博选项，前期容错太低。</li>
-            </ul>
-          </section>
-
-          <section className="mb-10">
-            <h2 className="text-xl font-display font-semibold text-tactical-blue mb-4">FAQ</h2>
-            <div className="space-y-3">
-              <details className="border border-border-subtle bg-abyss-light p-4">
-                <summary className="font-display font-medium text-text-primary cursor-pointer">
-                  新手最适合哪个派系？
-                </summary>
-                <p className="mt-3 text-text-secondary text-sm leading-relaxed">
-                  根据社区估算，Humans 和 Dwarves 的平均首通率最高。Humans 平衡全面，容错中等；Dwarves 防御高，
-                  适合喜欢稳扎稳打的玩家。Elves 和 Orcs 更适合二周目以后挑战。
-                </p>
-              </details>
-              <details className="border border-border-subtle bg-abyss-light p-4">
-                <summary className="font-display font-medium text-text-primary cursor-pointer">
-                  金币和铁应该怎么分配？
-                </summary>
-                <p className="mt-3 text-text-secondary text-sm leading-relaxed">
-                  前中期建议保持 3:1 的金铁消耗比例。优先升级 1-2 件核心装备，保证治疗，然后再考虑扩充部队。铁主
-                  要用于关键装备升级和紧急防御工事，不要早期大量囤积。
-                </p>
-              </details>
-              <details className="border border-border-subtle bg-abyss-light p-4">
-                <summary className="font-display font-medium text-text-primary cursor-pointer">
-                  为什么我总是第三场战斗翻车？
-                </summary>
-                <p className="mt-3 text-text-secondary text-sm leading-relaxed">
-                  第三场通常是敌军兵种组合第一次出现变化的节点。如果没有提前准备反骑兵或控制技能，阵型容易被
-                  冲散。建议在第二场后补一个长枪兵或带控制技能的单位，并保持主力血量健康。
-                </p>
-              </details>
-            </div>
-          </section>
-
-          <p className="text-xs text-text-muted font-mono text-center mt-8">
-            数据标注：文中数值为社区玩家估算，实际以游戏内为准。Tabletop Tavern 于 2026 年 6 月 11 日发售。
+          <p className="text-sm text-text-secondary">
+            Everything you need to know to start your Vampire Crawlers journey. Covers the combo system, gems, evolutions, village upgrades, and dungeon progression.
           </p>
         </div>
+
+        {/* Core Mechanic: Combo Chain */}
+        <section>
+          <h2 className="font-display text-lg font-semibold text-text-primary mb-3">
+            1. The Combo Chain System
+          </h2>
+          <div className="space-y-3 text-sm text-text-secondary leading-relaxed">
+            <p>
+              The combo chain is the heart of Vampire Crawlers. Each turn, you play cards from your hand in <strong className="text-text-primary">ascending mana cost order</strong>. Every card you play multiplies the effect of the next card in the chain.
+            </p>
+            <p>
+              For example: play a 0-cost Bone, then a 1-cost King Bible, then a 2-cost Lightning Ring. The Lightning Ring gets a <strong className="text-tactical-blue">3x multiplier</strong> because it is third in the chain. The longer the chain, the higher the multiplier — players regularly reach 20x, 30x, or more.
+            </p>
+            <p>
+              <strong className="text-warning-orange">Key rule:</strong> The chain resets at the end of your turn. An 8-card chain in one turn is far more powerful than two 4-card chains across two turns. Always extend your chain when possible.
+            </p>
+          </div>
+        </section>
+
+        {/* Turboturn */}
+        <section>
+          <h2 className="font-display text-lg font-semibold text-text-primary mb-3">
+            2. Turboturn System
+          </h2>
+          <div className="space-y-3 text-sm text-text-secondary leading-relaxed">
+            <p>
+              Turboturn is poncle's name for the combat input system. It lets you queue cards without waiting for animations to finish. You can plan your entire turn before playing the first card.
+            </p>
+            <p>
+              <strong className="text-text-primary">For beginners:</strong> Do not rush. Use Turboturn to plan your card order carefully. There is no time pressure. Sort your hand by mana cost, identify your chain, then execute.
+            </p>
+          </div>
+        </section>
+
+        {/* Card Types */}
+        <section>
+          <h2 className="font-display text-lg font-semibold text-text-primary mb-3">
+            3. Card Types
+          </h2>
+          <div className="bg-abyss-light border border-border-subtle overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-grid-line">
+                  <th className="text-left py-2.5 px-4 text-[10px] font-mono uppercase text-text-muted">TYPE</th>
+                  <th className="text-left py-2.5 px-4 text-[10px] font-mono uppercase text-text-muted">FUNCTION</th>
+                  <th className="text-left py-2.5 px-4 text-[10px] font-mono uppercase text-text-muted">CHAIN ROLE</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { type: 'Weapon Cards', func: 'Primary damage dealers', role: 'Core damage in every chain slot' },
+                  { type: 'Item Cards', func: 'Trigger weapon evolutions', role: 'Required for evolution. Stays in deck after.' },
+                  { type: 'Armor Cards', func: 'Block incoming damage', role: 'Fill low-cost slots (0-1 mana)' },
+                  { type: 'Utility Cards', func: 'Supportive effects', role: 'Fill gaps in chain order' },
+                  { type: 'Wild Cards', func: 'Bridge mana cost gaps', role: 'Chain insurance — keeps multiplier alive' },
+                  { type: 'Draw Cards', func: 'Draw extra cards from deck', role: 'Disproportionately strong. Find your next cost tier.' },
+                ].map((row, i) => (
+                  <tr key={i} className="data-row">
+                    <td className="py-2.5 px-4 text-text-primary font-medium">{row.type}</td>
+                    <td className="py-2.5 px-4 text-text-secondary text-xs">{row.func}</td>
+                    <td className="py-2.5 px-4 text-text-secondary text-xs">{row.role}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {/* Gem System */}
+        <section>
+          <h2 className="font-display text-lg font-semibold text-text-primary mb-3">
+            4. Gem System
+          </h2>
+          <div className="space-y-3 text-sm text-text-secondary leading-relaxed">
+            <p>
+              There are two types of gems in Vampire Crawlers:
+            </p>
+            <div className="space-y-2">
+              <div className="stat-card">
+                <p className="text-text-primary font-medium text-sm mb-1">Evolution Gems</p>
+                <p className="text-xs text-text-secondary">
+                  Found at Evolution Statues, in chests, or as boss rewards. These trigger weapon evolutions when you have the correct base card and item card.
+                </p>
+              </div>
+              <div className="stat-card">
+                <p className="text-text-primary font-medium text-sm mb-1">Customization Gems</p>
+                <p className="text-xs text-text-secondary">
+                  Add extra effects to individual cards. Inserted into empty gem sockets on weapon cards.
+                </p>
+              </div>
+            </div>
+            <p className="text-warning-orange text-xs font-mono">
+              WARNING: Never insert Customization Gems into cards you plan to evolve. Filled sockets block evolution. Keep evolution target cards socket-free.
+            </p>
+          </div>
+        </section>
+
+        {/* Village Upgrades */}
+        <section>
+          <h2 className="font-display text-lg font-semibold text-text-primary mb-3">
+            5. Village Upgrade Priority
+          </h2>
+          <div className="bg-abyss-light border border-border-subtle">
+            {[
+              { rank: '1st', name: 'Greed', effect: '+25% gold per rank. More gold = faster upgrades.', target: 'Rank 2-3 ASAP' },
+              { rank: '2nd', name: 'Might', effect: 'Global weapon damage bonus. Best combat upgrade.', target: 'Rank 2 early' },
+              { rank: '3rd', name: 'Max Health / Recovery', effect: 'Increase HP and post-battle healing. Reduces death risk.', target: 'Adjust to playstyle' },
+              { rank: '4th', name: 'Blacksmith', effect: 'Upgrade cards for more gem sockets. Enables customization.', target: 'Rank 2 early' },
+            ].map((row, i) => (
+              <div key={i} className={`flex items-center gap-4 px-4 py-3 ${i < 3 ? 'border-b border-grid-line' : ''}`}>
+                <span className="font-mono text-xs text-tactical-blue w-8 shrink-0">{row.rank}</span>
+                <div className="flex-1">
+                  <p className="text-text-primary font-medium text-sm">{row.name}</p>
+                  <p className="text-xs text-text-secondary">{row.effect}</p>
+                </div>
+                <span className="tag shrink-0">{row.target}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* First Run Walkthrough */}
+        <section>
+          <h2 className="font-display text-lg font-semibold text-text-primary mb-3">
+            6. First Run Walkthrough
+          </h2>
+          <div className="space-y-3">
+            {[
+              { step: '1', title: 'Choose Antonio or Imelda', detail: 'Both are starting characters. Antonio (Whip) is melee-focused. Imelda (Magic Wand) is ranged. Either works for learning.' },
+              { step: '2', title: 'Enter Mad Forest', detail: 'The first dungeon. Explore the grid-based map, break objects for gold and items, fight enemies to gain XP.' },
+              { step: '3', title: 'Level up and pick cards', detail: 'Each level-up offers 3 card choices. Prioritize 0-cost and 1-cost weapon cards to fill your chain. Add an item card if you see one matching your weapon.' },
+              { step: '4', title: 'Find the Evolution Statue', detail: 'If you have a base weapon + matching item card, the Evolution Statue (black statue with red gem) will trigger your first evolution. This is a massive power spike.' },
+              { step: '5', title: 'Defeat the boss', detail: 'Bosses appear at floor milestones. Use your strongest chain combo. Save Floor Chickens (hidden behind breakable objects) for boss healing.' },
+              { step: '6', title: 'Return to village and upgrade', detail: 'Spend earned gold on Greed first, then Might. Visit the Blacksmith to upgrade cards. Check Town Hall for unlock progress.' },
+            ].map((item, i) => (
+              <div key={i} className="flex gap-4">
+                <div className="w-8 h-8 bg-tactical-blue/10 border border-tactical-blue/30 flex items-center justify-center shrink-0">
+                  <span className="font-mono text-sm text-tactical-blue font-bold">{item.step}</span>
+                </div>
+                <div className="flex-1 pb-3">
+                  <h3 className="font-display text-sm font-semibold text-text-primary mb-1">{item.title}</h3>
+                  <p className="text-xs text-text-secondary leading-relaxed">{item.detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Pro Tips */}
+        <section>
+          <h2 className="font-display text-lg font-semibold text-text-primary mb-3">
+            7. Pro Tips
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {[
+              'Always sort your hand by mana cost before playing. Visual sorting makes chain planning easier.',
+              'Draw cards are the strongest utility in the game. Draft them aggressively.',
+              'Do not fill gem sockets on cards you plan to evolve. This is the most common beginner mistake.',
+              'Floor Chickens hidden behind breakable objects heal you. Save them for boss fights.',
+              'Check the Town Hall to track all unlock conditions for Crawlers and dungeons.',
+              'Greed is always the first village upgrade. More gold accelerates everything else.',
+              'Wild cards are not just fillers — they are chain insurance. Keep at least one in hand.',
+              'Arcana cards are pre-run modifiers. Unlock Chain Link as soon as possible — it transforms the game.',
+            ].map((tip, i) => (
+              <div key={i} className="stat-card">
+                <p className="text-xs text-text-secondary leading-relaxed">
+                  <span className="text-tactical-blue font-mono mr-1">&gt;</span>
+                  {tip}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <div className="terminal-block">
+          <p className="text-text-muted mb-1">
+            <span className="text-warning-orange">$</span> beginner.checklist
+          </p>
+          <p>[x] Understand combo chain system</p>
+          <p>[x] Know card types and their roles</p>
+          <p>[x] Gem system: never block evolution sockets</p>
+          <p>[x] Village priority: Greed &rarr; Might &rarr; Health</p>
+          <p>[x] First dungeon: Mad Forest with Antonio</p>
+          <p className="cursor-blink">ready to crawl</p>
+        </div>
       </div>
+    </div>
   );
 }

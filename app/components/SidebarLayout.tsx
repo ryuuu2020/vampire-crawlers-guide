@@ -4,19 +4,21 @@ import { useState } from 'react';
 
 const NAV_ITEMS = [
   { label: 'Home', href: '/', active: true },
-  { label: 'Faction Tier List', href: '/tier-list' },
+  { label: 'Tier List', href: '/tier-list' },
   { label: 'Best Builds', href: '/builds' },
+  { label: 'Card Database', href: '/cards' },
+  { label: 'Evolutions', href: '/evolutions' },
+  { label: 'Dungeons', href: '/dungeons' },
+  { label: 'Beginner Guide', href: '/beginners-guide' },
   { label: 'Strategy Guides', href: '/guides' },
-  { label: 'Unit Database', href: '/database' },
-  { label: 'Campaign Map', href: '/campaign' },
   { label: 'FAQ', href: '/faq' },
 ];
 
 const STATS = [
-  { label: 'FACTIONS', value: '5', unit: '' },
-  { label: 'PATCH', value: '1.0.2', unit: '' },
-  { label: 'UNITS', value: '28', unit: '' },
-  { label: 'LAST UPDATE', value: '2026-06-25', unit: '' },
+  { label: 'CRAWLERS', value: '21', unit: '' },
+  { label: 'PATCH', value: '1.0', unit: '' },
+  { label: 'EVOLUTIONS', value: '17', unit: '' },
+  { label: 'UPDATED', value: '2026-06-26', unit: '' },
 ];
 
 export default function SidebarLayout({ children }: { children: React.ReactNode }) {
@@ -44,15 +46,15 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
         {/* Logo */}
         <a href="/" className="flex items-center gap-3 px-4 h-14 border-b border-border-subtle hover:bg-white/5 transition-colors">
           <div className="w-7 h-7 bg-tactical-blue flex items-center justify-center">
-            <span className="text-[10px] font-mono font-bold text-abyss">CMD</span>
+            <span className="text-[10px] font-mono font-bold text-abyss">VC</span>
           </div>
           <span className="font-display text-sm font-semibold tracking-tight text-text-primary">
-            TTG
+            Vampire Crawlers
           </span>
         </a>
 
         {/* Navigation */}
-        <nav className="py-4 flex flex-col gap-0.5 flex-1">
+        <nav className="py-4 flex flex-col gap-0.5 flex-1 overflow-y-auto">
           {NAV_ITEMS.map((item) => (
             <a
               key={item.href}
@@ -68,7 +70,7 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
         {/* Bottom section */}
         <div className="p-4 border-t border-border-subtle">
           <p className="text-[11px] font-mono text-text-muted">
-            Tabletop Tavern Guide
+            Vampire Crawlers Guide
           </p>
           <p className="text-[10px] font-mono text-text-muted mt-0.5">
             v1.0.0
@@ -93,7 +95,7 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
 
           {/* Stats */}
           {STATS.map((stat) => (
-            <div key={stat.label} className="flex items-baseline gap-1.5">
+            <div key={stat.label} className="hidden sm:flex items-baseline gap-1.5">
               <span className="text-[10px] font-mono uppercase tracking-wider text-text-muted">
                 {stat.label}
               </span>
@@ -128,14 +130,14 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
             <div className="mb-4 pb-4 border-b border-border-subtle">
               <p className="text-[10px] font-mono uppercase tracking-wider text-text-muted mb-2">More Strategy Game Guides</p>
               <div className="flex flex-wrap gap-3">
-                <a href="https://dispatch-guide-sigma.vercel.app" target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-text-secondary hover:text-tactical-blue transition-colors">Dispatch Guide</a>
                 <a href="https://menace-guide.vercel.app" target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-text-secondary hover:text-tactical-blue transition-colors">MENACE Guide</a>
-                <a href="https://demon-lord-guide.vercel.app" target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-text-secondary hover:text-tactical-blue transition-colors">Demon Lord Guide</a>
+                <a href="https://tabletop-tavern-guide.vercel.app" target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-text-secondary hover:text-tactical-blue transition-colors">Tabletop Tavern Guide</a>
+                <a href="https://dispatch-guide-sigma.vercel.app" target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-text-secondary hover:text-tactical-blue transition-colors">Dispatch Guide</a>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-4 text-[11px] font-mono text-text-muted">
-                <span>&copy; {new Date().getFullYear()} Tabletop Tavern Guide</span>
+                <span>&copy; {new Date().getFullYear()} Vampire Crawlers Guide</span>
                 <a href="/privacy" className="hover:text-text-secondary transition-colors">
                   Privacy
                 </a>

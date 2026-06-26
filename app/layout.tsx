@@ -3,12 +3,12 @@ import SidebarLayout from './components/SidebarLayout';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Tabletop Tavern Guide - Best Factions, Builds & Strategy',
-  description: 'The ultimate Tabletop Tavern guide with faction tier lists, unit counters, campaign strategies, item synergies and achievement tracking. Master the roguelike RTS.',
-  metadataBase: new URL('https://tabletop-tavern-guide.vercel.app'),
+  title: 'Vampire Crawlers Guide - Best Cards, Builds & Tier List',
+  description: 'The ultimate Vampire Crawlers guide with character tier lists, card database, weapon evolution recipes, build strategies, dungeon walkthroughs, and combo mechanics. Master the roguelite deckbuilder.',
+  metadataBase: new URL('https://vampire-crawlers-guide.vercel.app'),
   openGraph: {
-    title: 'Tabletop Tavern Guide',
-    description: 'The ultimate Tabletop Tavern guide with faction tier lists, unit counters, campaign strategies, item synergies and achievement tracking. Master the roguelike RTS.',
+    title: 'Vampire Crawlers Guide',
+    description: 'The ultimate Vampire Crawlers guide with character tier lists, card database, weapon evolution recipes, build strategies, dungeon walkthroughs, and combo mechanics.',
     type: 'website',
   },
   verification: {
