@@ -6,6 +6,11 @@ export default function NewsPage() {
       summary: 'Tabletop Tavern launched on Steam by developer TJ (Frostbloom / Gamirror Games). The game is a roguelike RTS where you build an army from scratch and command them across a brutal campaign. Features 5 factions, 25 Steam achievements, and procedurally generated campaigns.',
     },
     {
+      date: '2026-06-26',
+      title: 'Patch 1.6.24: Melee Rebalance + Control Improvements',
+      summary: "TJ and Gamirror Games released patch 1.6.24 for Tabletop Tavern, focusing on melee combat rebalancing and control improvements. Melee units across all 5 factions received adjusted damage scaling — heavy infantry hits harder but attacks slower, while light skirmishers gained faster attack speed at reduced per-hit damage. The patch introduces customizable hotkey rebinding (a top community request) and improved unit pathfinding around terrain obstacles. Campaign AI is now more aggressive on Hard and Nightmare difficulties. Previous patch 1.6.23 laid the engine groundwork for these changes. Existing campaign saves remain fully compatible, though balance changes take effect immediately upon loading.",
+    },
+    {
       date: '2026-06-25',
       title: 'Community Guide Now Available',
       summary: 'This Tabletop Tavern Guide site is now live, covering faction tier lists, build strategies, campaign map navigation, unit counters, and item synergies. Data sourced from community gameplay and Steam store information.',
