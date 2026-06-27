@@ -5,6 +5,13 @@
 
 const NEWS_ARTICLES = [
   {
+    date: "2026-06-27",
+    title: "Vampire Crawlers Version 1.5 — Endless Mode, Card Sorting, and QOL Overhaul",
+    tag: "Update",
+    excerpt:
+      "Vampire Crawlers received a substantial quality-of-life update on June 23 with Version 1.5, and it addresses nearly every common community request since the game's April 21 launch. The headline feature is Endless Mode, which unlocks after completing the main game and discovering the new relic teaser area — giving veteran players a reason to keep their runs going beyond the final boss. Card management gets a major upgrade: you can now sort cards by mana cost or color, and a unified deck view consolidates what was previously a scattered interface. The Jeweller system has been clarified, with chest and gem behavior now properly explained in-game rather than requiring players to consult external wikis. Tooltip settings have been expanded, giving players more control over information density during fast-paced combat. Always-available quit options have been added. Steam Community Items are now live, and the 2026 roadmap has been contextualized: Death Parade is confirmed as the next major update, followed by Bone Deep and Curdled Tunnels, with a 2027 Astral Stair tease.",
+  },
+  {
     date: '2026-06-26',
     title: 'Combo Chain Mechanics Deep Dive: How to Build 20x+ Multipliers',
     tag: 'GUIDE',
