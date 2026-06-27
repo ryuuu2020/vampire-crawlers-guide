@@ -9,18 +9,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        abyss: '#f2f1ed',
-        'abyss-light': '#e6e5e0',
-        'abyss-elevated': '#ebeae5',
+        abyss: '#12100c',
+        'abyss-light': '#0a0806',
+        'abyss-elevated': '#1c1812',
         'accent-primary': '#f54e00',
-        'accent-primary-dim': '#cf2d56',
-        'accent-primary-glow': 'rgba(245,78,0,0.08)',
+        'accent-primary-dim': '#ff6b2b',
+        'accent-primary-glow': 'rgba(245,78,0,0.10)',
         'accent-secondary': '#c08532',
-        'text-primary': '#26251e',
-        'text-secondary': 'rgba(38,37,30,0.7)',
-        'text-muted': 'rgba(38,37,30,0.45)',
-        'border-subtle': 'rgba(38,37,30,0.1)',
-        'border-strong': 'rgba(38,37,30,0.2)',
+        'text-primary': '#ede5d6',
+        'text-secondary': 'rgba(237,229,214,0.72)',
+        'text-muted': 'rgba(237,229,214,0.45)',
+        'border-subtle': 'rgba(237,229,214,0.08)',
+        'border-strong': 'rgba(237,229,214,0.14)',
       },
       fontFamily: {
         display: ["Inter", "system-ui", "sans-serif"],
