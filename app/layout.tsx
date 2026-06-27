@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import SidebarLayout from './components/SidebarLayout';
 import './globals.css';
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: 'Vampire Crawlers Guide - Best Cards, Builds & Tier List',
@@ -28,19 +29,14 @@ export default function RootLayout({
         <meta name="google-site-verification" content="4cd6cdf221ea7b0b" />
 
         {/* Google Analytics 4 */}
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=G-ET6778V62K`} />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-ET6778V62K');
-            `,
-          }}
-        />
-        {/* Google AdSense */}
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8925824244664340" crossOrigin="anonymous" />
+        <Script strategy="lazyOnload" src="https://www.googletagmanager.com/gtag/js?id=G-ET6778V62K" />
+        <Script strategy="lazyOnload" id="gtag-init">
+              {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-ET6778V62K');`}
+            </Script>
+        <Script strategy="lazyOnload" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8925824244664340" crossOrigin="anonymous" />
       </head>
       <body className="font-body min-h-screen flex flex-col">
         <SidebarLayout>{children}</SidebarLayout>
