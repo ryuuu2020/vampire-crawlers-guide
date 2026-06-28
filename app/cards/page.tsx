@@ -46,6 +46,12 @@ const CARD_COLORS = [
   { color: 'Red Cards', crawler: 'Antonio Belpaese', effect: 'Antonio deals +10% damage when playing red cards' },
   { color: 'Blue Cards', crawler: 'Suor Clerici', effect: 'Suor Clerici recovers 1 HP for each blue card played' },
 ];
+export const metadata = {
+  title: "Vampire Crawlers Card Database — Complete Guide (2026)",
+  description:
+    "Complete reference for all card types in Vampire Crawlers. Learn how each card type functions in the combo chain system and which cards to prioritize.",
+};
+
 
 export default function CardsPage() {
   return (

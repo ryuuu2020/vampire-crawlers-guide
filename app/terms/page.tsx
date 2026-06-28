@@ -1,3 +1,9 @@
+export const metadata = {
+  title: "Vampire Crawlers TERMS OF USE — Complete Guide (2026)",
+  description:
+    "Vampire Crawlers Guide is an unofficial fan strategy site. All content is for gameplay reference only.",
+};
+
 export default function TermsPage() {
   return (
     <div className="p-4 lg:p-6">

@@ -26,6 +26,12 @@ const GUIDE_SECTIONS = [
     ],
   },
 ];
+export const metadata = {
+  title: "Vampire Crawlers Strategy Guides — Complete Guide (2026)",
+  description:
+    "Browse all Vampire Crawlers guides by category. Whether you are a beginner learning the combo system or an experienced player optimizing your build, you will find what you need here.",
+};
+
 
 export default function GuidesPage() {
   return (

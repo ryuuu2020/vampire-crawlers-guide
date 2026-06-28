@@ -132,6 +132,12 @@ function TierTable({ title, data, columns }: { title: string; data: any[]; colum
     </div>
   );
 }
+export const metadata = {
+  title: "Vampire Crawlers Tier List — Complete Guide (2026)",
+  description:
+    "Complete rankings for all Crawlers, weapon cards, power ups, and Arcana. Based on community consensus and high-level play data for Patch 1.0.",
+};
+
 
 export default function TierListPage() {
   return (

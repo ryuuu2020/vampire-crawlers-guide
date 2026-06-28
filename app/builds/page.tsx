@@ -77,6 +77,12 @@ const COMBO_PRINCIPLES = [
     detail: 'You can queue your entire hand without waiting for animations. Take your time to plan the optimal order before playing the first card.',
   },
 ];
+export const metadata = {
+  title: "Vampire Crawlers Best Builds & Combo Guide — Complete Guide (2026)",
+  description:
+    "Master the combo chain system with build archetypes, card order strategies, and Arcana synergies for every playstyle.",
+};
+
 
 export default function BuildsPage() {
   return (

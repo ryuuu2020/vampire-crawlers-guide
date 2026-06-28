@@ -68,6 +68,12 @@ const DUNGEONS = [
     unlocks: "O'Sole (defeat 50 Dragon Shrimps), Concetta (find coffin), Gallo (defeat boss)",
   },
 ];
+export const metadata = {
+  title: "Vampire Crawlers Dungeon Guide — Complete Guide (2026)",
+  description:
+    "Complete dungeon unlock order, boss strategies, and unlockable character locations. Dungeons are first-person grid-based, similar to classic Might and Magic.",
+};
+
 
 export default function DungeonsPage() {
   return (

@@ -28,6 +28,12 @@ function getTierColor(tier: string): string {
 }
 
 import Image from 'next/image';
+export const metadata = {
+  title: "Vampire Crawlers Vampire Crawlers Guide — Complete Guide (2026)",
+  description:
+    "The definitive deckbuilder resource — cards, builds, evolutions & tier lists",
+};
+
 
 export default function HomePage() {
   return (

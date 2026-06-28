@@ -77,6 +77,12 @@ After your first dungeon, return to the village and upgrade Greed first (more go
 Most importantly: take your time with Turboturn. There is no time pressure. Plan your chain before executing. One well-planned turn beats four rushed ones.`,
   },
 ];
+export const metadata = {
+  title: "Vampire Crawlers News & Updates — Complete Guide (2026)",
+  description:
+    "Latest guides, tier list updates, and Vampire Crawlers news. Updated regularly with patch analysis and strategy deep dives.",
+};
+
 
 export default function NewsPage() {
   return (

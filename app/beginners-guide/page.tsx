@@ -2,6 +2,12 @@
    Vampire Crawlers Guide — Beginner's Guide
    Core mechanics, progression, and first-run tips
    ============================================ */
+export const metadata = {
+  title: "Vampire Crawlers Beginner's Guide — Complete Guide (2026)",
+  description:
+    "Everything you need to know to start your Vampire Crawlers journey. Covers the combo system, gems, evolutions, village upgrades, and dungeon progression.",
+};
+
 
 export default function BeginnerGuidePage() {
   return (

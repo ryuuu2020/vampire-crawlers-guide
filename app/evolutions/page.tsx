@@ -33,6 +33,12 @@ const UNION_EVOLUTIONS = [
     note: 'Three cards consumed. Phieraggi deals 350 damage per proc. Requires all three cards in deck simultaneously.',
   },
 ];
+export const metadata = {
+  title: "Vampire Crawlers Weapon Evolutions — Complete Guide (2026)",
+  description:
+    "Complete evolution recipe chart. Every weapon evolution requires a base weapon card, a matching item card, an empty gem socket on the base card, and an Evolution Gem from a statue, chest, or boss.",
+};
+
 
 export default function EvolutionsPage() {
   return (

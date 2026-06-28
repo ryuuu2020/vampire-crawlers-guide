@@ -53,6 +53,12 @@ const FAQS = [
     a: 'Yes. Vampire Crawlers is developed by poncle (creators of Vampire Survivors) in collaboration with Nosebleed Interactive. It transforms the snowballing auto-battler formula into a turn-based roguelite deckbuilder. Many weapons, characters, and items are inspired by Vampire Survivors, but the gameplay is entirely different.',
   },
 ];
+export const metadata = {
+  title: "Vampire Crawlers Frequently Asked Questions — Complete Guide (2026)",
+  description:
+    "Common questions from Vampire Crawlers players, answered with accurate game data.",
+};
+
 
 export default function FAQPage() {
   return (
