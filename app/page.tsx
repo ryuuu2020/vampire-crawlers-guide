@@ -27,6 +27,8 @@ function getTierColor(tier: string): string {
   }
 }
 
+import Image from 'next/image';
+
 export default function HomePage() {
   return (
     <div className="p-4 lg:p-6">
@@ -34,10 +36,11 @@ export default function HomePage() {
 
         {/* ===== Hero Banner ===== */}
         <section className="relative overflow-hidden border border-border-subtle bg-abyss-light">
-          <img
+          <Image
             src="/hero.jpg"
             alt="Vampire Crawlers"
-            className="w-full h-48 lg:h-64 object-cover opacity-80"
+            fill
+            className="object-cover opacity-80"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-abyss-light via-transparent to-transparent pointer-events-none" />
           <div className="absolute bottom-4 left-4 lg:bottom-6 lg:left-6">
