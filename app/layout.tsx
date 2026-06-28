@@ -37,6 +37,15 @@ gtag('js', new Date());
 gtag('config', 'G-ET6778V62K');`}
             </Script>
         <Script strategy="lazyOnload" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8925824244664340" crossOrigin="anonymous" />
+      
+        {/* JSON-LD Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={
+            __html: `{"@context": "https://schema.org", "@type": "WebSite", "name": "Vampire Crawlers Guide", "url": "https://vampire-crawlers-guide.vercel.app"}`
+          }
+        />
+
       </head>
       <body className="font-body min-h-screen flex flex-col">
         <SidebarLayout>{children}</SidebarLayout>
