@@ -133,6 +133,7 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
                 <a href="https://menace-guide.vercel.app" target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-text-secondary hover:text-tactical-blue transition-colors">MENACE Guide</a>
                 <a href="https://tabletop-tavern-guide.vercel.app" target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-text-secondary hover:text-tactical-blue transition-colors">Tabletop Tavern Guide</a>
                 <a href="https://dispatch-guide-sigma.vercel.app" target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-text-secondary hover:text-tactical-blue transition-colors">Dispatch Guide</a>
+                <a href="https://mewgenics-guide.vercel.app" target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-text-secondary hover:text-tactical-blue transition-colors">Mewgenics Guide</a>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
