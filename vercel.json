@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "vampire-crawlers-guide.vercel.app" }],
+      "destination": "https://vampirecrawlers.gguidehub.com/$1",
+      "permanent": true
+    }
+  ]
+}
