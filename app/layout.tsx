@@ -2,11 +2,13 @@ import type { Metadata } from 'next';
 import SidebarLayout from './components/SidebarLayout';
 import './globals.css';
 import Script from "next/script";
+import SchemaMarkup from '@/shared/SchemaMarkup';
+
 
 export const metadata: Metadata = {
   title: 'Vampire Crawlers Guide - Best Cards, Builds & Tier List',
   description: 'The ultimate Vampire Crawlers guide with character tier lists, card database, weapon evolution recipes, build strategies, dungeon walkthroughs, and combo mechanics. Master the roguelite deckbuilder.',
-  metadataBase: new URL('https://vampire-crawlers-guide.vercel.app'),
+  metadataBase: new URL("https://vampirecrawlers.gguidehub.com"),
   openGraph: {
     title: 'Vampire Crawlers Guide',
     description: 'The ultimate Vampire Crawlers guide with character tier lists, card database, weapon evolution recipes, build strategies, dungeon walkthroughs, and combo mechanics.',
